@@ -23,7 +23,7 @@ jobs:
         with:
           polaris_server_url: ${{ secrets.POLARIS_SERVER_URL }}
           polaris_access_token: ${{ secrets.POLARIS_ACCESS_TOKEN }}
-          polaris_application_name: "Acme Demo"
+          polaris_application_name: "Singh Interview"
           polaris_project_name: "acme-webgoat"
           polaris_assessment_types: "SAST,SCA"
           polaris_prComment_enabled: ${{ github.event_name == 'pull_request' }}
