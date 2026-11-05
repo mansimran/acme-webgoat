@@ -28,4 +28,18 @@ jobs:
           polaris_assessment_types: "SAST,SCA"
           polaris_prComment_enabled: ${{ github.event_name == 'pull_request' }}
           polaris_prComment_severities: "CRITICAL,HIGH"
+          polaris_reports_sarif_create: true
+          polaris_reports_sarif_severities: "CRITICAL,HIGH"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Gate on Critical/High findings
+        if: github.event_name == 'pull_request'
+        run: |
+          f=.blackduck/integrations/polaris/sarif/report.sarif.json
+          ls -la "$f"
+          n=$(jq '[.runs[].results[]] | length' "$f")
+          echo "Critical/High findings in report: $n"
+          if [ "$n" -gt 0 ]; then
+            echo "Blocking merge: new Critical/High findings"
+            exit 1
+          fi
