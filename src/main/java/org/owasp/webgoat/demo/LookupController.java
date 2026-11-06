@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText: Copyright © 2026 WebGoat authors
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
 package org.owasp.webgoat.demo;
 
 import java.sql.Connection;
